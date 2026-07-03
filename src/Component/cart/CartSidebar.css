@@ -1,0 +1,268 @@
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1100;
+}
+
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  max-width: 90vw;
+  height: 100vh;
+  background: white !important;
+  z-index: 1101;
+  padding: 15px;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease;
+  -webkit-animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  margin: 0 0 20px 0;
+  border: none;
+}
+
+.cart-header h3 {
+  color: var(--text-primary);
+}
+.cart-header .Close-Icon {
+  border: none;
+  /* background: red; */
+  color: red;
+  font-size: 25px;
+  cursor: pointer;
+  /* padding: -2px 2px; */
+}
+
+.item-total {
+  text-align: right;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 5px 0;
+}
+/* Start Cart item */
+
+.cart-item {
+  /* display: flex; */
+  gap: 10px;
+  margin-bottom: 15px;
+  /* justify-content: space-between; */
+  /* background: yellow; */
+  border: none;
+  border-bottom: 1px solid var(--text-primary);
+}
+
+
+.cart-items p:nth-child(1){
+  text-align: right;
+  color: var(--text-secondary);
+}
+
+.cart-items .cart-item:first-child {
+  border-top: 1px solid var(--text-primary);
+  padding-top: 15px;
+}
+
+
+.header-cart-item {
+  display: flex;
+  /* align-items: start; */
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  /* background: red; */
+}
+
+.header-cart-item .column-one {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 5px;
+}
+
+.cart-item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.box-name-pris h4 {
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.box-name-pris p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.header-cart-item .column-tow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  /* background: red; */
+}
+
+.remove-item-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0px 0;
+  direction: ltr;
+}
+
+.qty-btn {
+  background: var(--bg-secondary, #eee);
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.quantity-value {
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+}
+
+
+/* End Cart item */
+
+
+
+
+
+
+
+
+.remove-desc-btn {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 8px;
+}
+
+.remove-desc-btn:hover {
+  color: #c0392b;
+}
+
+.removed-desc {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* list description */
+.description-checkboxes {
+  margin: 8px 0;
+  text-align: right;
+}
+
+
+.desc-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--text-primary) !important;
+}
+
+.checkbox-label {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin: 4px 0;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+
+.checkout-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px 0 80px 0;
+}
+
+
+
+
+/*  */
+
+.cart-footer p {
+  color: var(--text-primary);
+}
+
+.cart-footer strong {
+  color: var(--primary-alt);
+}
+
+
+@media (max-width:470px) {
+  /* .cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  max-width: 90vw;
+  height: 100vh;
+  background: white !important;
+  z-index: 1101;
+  padding: 15px;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease;
+  -webkit-animation: slideIn 0.3s ease;
+} */
+}

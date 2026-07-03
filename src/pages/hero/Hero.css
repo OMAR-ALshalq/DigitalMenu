@@ -1,0 +1,156 @@
+.Main-box-Hero {
+  width: 100%;
+  height: 80vh;
+  background: var(--section-bg2);
+}
+
+.Main-box-Hero .box-Logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.Main-box-Hero .box-Logo img {
+  width: 250px;
+  height: 250px;
+  margin: 30px 0 0 0;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+@media (max-width: 470px) {
+  .Main-box-Hero {
+    height: 490px;
+  }
+  .Main-box-Hero .box-Logo img {
+    width: 200px;
+    height: 200px;
+    margin: 30px 0 0 0;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+  }
+}
+
+.Main-box-Hero .box-title {
+  width: 100%;
+  margin: 30px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Main-box-Hero .box-title h3 {
+  color: var(--text-primary);
+}
+
+.Main-box-Hero .box-title p {
+  color: var(--text-secondary);
+}
+
+.Main-box-Hero .box-SocialMedia {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 0 0;
+  gap: 20px;
+}
+
+.Main-box-Hero .box-SocialMedia a {
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition);
+}
+
+.Main-box-Hero .box-SocialMedia a:nth-child(1):hover {
+  background: rgb(50, 118, 219);
+}
+.Main-box-Hero .box-SocialMedia a:nth-child(2):hover {
+  background: rgb(74, 190, 90);
+}
+.Main-box-Hero .box-SocialMedia a:nth-child(3):hover {
+  background: rgb(206, 109, 166);
+}
+.Main-box-Hero .box-SocialMedia a:nth-child(4):hover {
+  background: black;
+}
+.Main-box-Hero .box-SocialMedia a:nth-child(5):hover {
+  background: rgb(231, 79, 79);
+}
+
+.Main-box-Hero .box-SocialMedia a:nth-child(1):hover .Icon-SocialMedia,
+.Main-box-Hero .box-SocialMedia a:nth-child(2):hover .Icon-SocialMedia,
+.Main-box-Hero .box-SocialMedia a:nth-child(3):hover .Icon-SocialMedia,
+.Main-box-Hero .box-SocialMedia a:nth-child(4):hover .Icon-SocialMedia,
+.Main-box-Hero .box-SocialMedia a:nth-child(5):hover .Icon-SocialMedia {
+  color: white;
+}
+
+.Main-box-Hero .box-SocialMedia a .Icon-SocialMedia {
+  font-size: 22px;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition);
+}
+
+.Main-box-Hero .box-Search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 0 0;
+}
+
+.Main-box-Hero .box-Search .box-search-icon {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  background: white;
+  width: 350px;
+  padding: 7px 2px;
+  gap: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.Main-box-Hero .box-Search .box-search-icon input {
+  width: 89%;
+  height: 100%;
+  text-align: right;
+  outline: none;
+  border: none;
+  padding: 2px 2px;
+  color: var(--text-primary);
+}
+
+.Main-box-Hero .box-Search .box-search-icon input::placeholder {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.Main-box-Hero .box-Search .box-search-icon .Icon-search {
+  font-size: 20px;
+  font-weight: 800;
+}
