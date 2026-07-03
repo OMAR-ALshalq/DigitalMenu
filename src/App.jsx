@@ -24,8 +24,8 @@ function App() {
     const fetchData = async () => {
       try {
         const [categoriesRes, itemsRes] = await Promise.all([
-          axios.get("https://server-digitalmenu.onrender.com/api/categories"),
-          axios.get("https://server-digitalmenu.onrender.com/api/items")
+          axios.get(`${import.meta.env.VITE_API_URL}/categories`),
+          axios.get(`${import.meta.env.VITE_API_URL}/items`)
         ]);
         setCategories(categoriesRes.data.data);
         setItems(

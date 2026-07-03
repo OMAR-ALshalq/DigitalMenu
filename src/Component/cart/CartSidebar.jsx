@@ -17,11 +17,11 @@ export default function CartSidebar({ isOpen, onClose }) {
   } = useCart();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   useLockBodyScroll(isOpen);
- const cleanDesc = (text) => {
-   if (!text) return "";
-   // يزيل جميع الأحرف من بداية النص حتى يصل إلى أول حرف عربي أو إنجليزي
-   return text.replace(/^[^ء-يa-zA-Z]+/, "").trim();
- };
+  const cleanDesc = (text) => {
+    if (!text) return "";
+    // يزيل جميع الأحرف من بداية النص حتى يصل إلى أول حرف عربي أو إنجليزي
+    return text.replace(/^[^ء-يa-zA-Z]+/, "").trim();
+  };
   if (!isOpen) return null;
 
   return (

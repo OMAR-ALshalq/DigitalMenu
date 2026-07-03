@@ -44,7 +44,7 @@ export default function CheckoutModal({ onClose }) {
     try {
       setLoading(true);
       const res = await axios.post(
-        "https://server-digitalmenu.onrender.com/api/orders",
+        `${import.meta.env.VITE_API_URL}/orders`,
         orderData
       );
       setSuccessOrder(res.data.data);

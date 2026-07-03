@@ -19,7 +19,7 @@ export default function TrackOrder() {
     setOrder(null);
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/orders/track/${orderNumber}`
+        `${import.meta.env.VITE_API_URL}/orders/track/${orderNumber}`
       );
       setOrder(res.data.data);
     // eslint-disable-next-line no-unused-vars
