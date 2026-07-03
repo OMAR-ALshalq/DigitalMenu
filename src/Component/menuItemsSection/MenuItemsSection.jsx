@@ -106,10 +106,12 @@ export default function MenuItemsSection({
                   <div className="item-card-body">
                     <h4>{item.name}</h4>
                     {item.description && item.description.length > 0 && (
-                        <p className="item-desc">{item.description.join(" _ ")}</p>
+                      <p className="item-desc">
+                        {item.description.join(" _ ")}
+                      </p>
                     )}
                     <div className="item-price">
-                      {item.price.toLocaleString()} ل.س
+                      <span> {item.price.toLocaleString()} ل.س</span>
                       <FaPlusSquare
                         className="add-to-cart-btn"
                         onClick={() => addToCart(item)}
