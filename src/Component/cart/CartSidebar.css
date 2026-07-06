@@ -266,3 +266,13 @@
   -webkit-animation: slideIn 0.3s ease;
 } */
 }
+
+
+
+
+
+.selected-size {
+  font-size: 13px;
+  color: #666;
+  margin: 2px 0;
+}
