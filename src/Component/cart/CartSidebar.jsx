@@ -17,11 +17,15 @@
 //   } = useCart();
 //   const [checkoutOpen, setCheckoutOpen] = useState(false);
 //   useLockBodyScroll(isOpen);
+
 //   const cleanDesc = (text) => {
 //     if (!text) return "";
-//     // يزيل جميع الأحرف من بداية النص حتى يصل إلى أول حرف عربي أو إنجليزي
 //     return text.replace(/^[^ء-يa-zA-Z]+/, "").trim();
 //   };
+
+//   // ✅ دالة مساعدة لاستخراج السعر الفعلي للعنصر
+//   const getItemPrice = (item) => item.selectedSize?.price || item.price || 0;
+
 //   if (!isOpen) return null;
 
 //   return (
@@ -48,7 +52,13 @@
 //                   </div>
 //                   <div className="box-name-pris">
 //                     <h4>{item.name}</h4>
-//                     <p dir="rtl">{item.price.toLocaleString()} ل.س</p>
+//                     {/* ✅ عرض الحجم المختار إن وجد */}
+//                     {item.selectedSize && (
+//                       <p className="selected-size" dir="rtl">
+//                         ({item.selectedSize.name})
+//                       </p>
+//                     )}
+//                     <p dir="rtl">{getItemPrice(item).toLocaleString()} ل.س</p>
 //                   </div>
 //                 </div>
 //                 <div className="column-tow">
@@ -109,7 +119,8 @@
 //                     </div>
 //                   )}
 //                 <p className="item-total">
-//                   الإجمالي: {(item.price * item.quantity).toLocaleString()} ل.س
+//                   الإجمالي:{" "}
+//                   {(getItemPrice(item) * item.quantity).toLocaleString()} ل.س
 //                 </p>
 //               </div>
 //             </div>
@@ -138,14 +149,13 @@
 
 import "./CartSidebar.css";
 import { useCart } from "../../context/CartContext";
-import { useState } from "react";
-import CheckoutModal from "./CheckoutModal";
+import { useNavigate } from "react-router-dom";
 import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 // Icon
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 import { IoIosCloseCircle } from "react-icons/io";
 
-export default function CartSidebar({ isOpen, onClose }) {
+export default function CartSidebar() {
   const {
     cartItems,
     removeFromCart,
@@ -153,26 +163,35 @@ export default function CartSidebar({ isOpen, onClose }) {
     totalPrice,
     toggleDescription
   } = useCart();
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  useLockBodyScroll(isOpen);
+  const navigate = useNavigate();
+
+  // بما أن المكون سيُعرض دائماً عند تفعيل المسار، نمنع التمرير دائماً
+  useLockBodyScroll(true);
+
+  // ✅ الإغلاق يعود مباشرة إلى الصفحة الرئيسية (يمنع العودة إلى /cart/checkout)
+  const handleClose = () => {
+    navigate("/", { replace: true });
+  };
+
+  // عند الضغط على متابعة الطلب: ننتقل إلى مسار إتمام الطلب
+  const handleCheckout = () => {
+    navigate("/cart/checkout");
+  };
 
   const cleanDesc = (text) => {
     if (!text) return "";
     return text.replace(/^[^ء-يa-zA-Z]+/, "").trim();
   };
 
-  // ✅ دالة مساعدة لاستخراج السعر الفعلي للعنصر
   const getItemPrice = (item) => item.selectedSize?.price || item.price || 0;
-
-  if (!isOpen) return null;
 
   return (
     <>
-      <div className="cart-overlay" onClick={onClose}></div>
+      <div className="cart-overlay" onClick={handleClose}></div>
       <div className="cart-sidebar">
         <div className="cart-header">
           <h3>سلة الطلبات</h3>
-          <IoIosCloseCircle className="Close-Icon" onClick={onClose} />
+          <IoIosCloseCircle className="Close-Icon" onClick={handleClose} />
         </div>
 
         <div className="cart-items">
@@ -190,7 +209,6 @@ export default function CartSidebar({ isOpen, onClose }) {
                   </div>
                   <div className="box-name-pris">
                     <h4>{item.name}</h4>
-                    {/* ✅ عرض الحجم المختار إن وجد */}
                     {item.selectedSize && (
                       <p className="selected-size" dir="rtl">
                         ({item.selectedSize.name})
@@ -231,7 +249,6 @@ export default function CartSidebar({ isOpen, onClose }) {
               </div>
 
               <div className="cart-item-info">
-                {/* المكونات كـ checkboxes */}
                 {item.originalDescription &&
                   item.originalDescription.length > 0 && (
                     <div className="description-checkboxes">
@@ -270,17 +287,12 @@ export default function CartSidebar({ isOpen, onClose }) {
             <p dir="rtl">
               الإجمالي: <strong>{totalPrice.toLocaleString()} ل.س</strong>
             </p>
-            <button
-              className="checkout-btn"
-              onClick={() => setCheckoutOpen(true)}
-            >
+            <button className="checkout-btn" onClick={handleCheckout}>
               متابعة الطلب
             </button>
           </div>
         )}
       </div>
-
-      {checkoutOpen && <CheckoutModal onClose={() => setCheckoutOpen(false)} />}
     </>
   );
 }

@@ -22,13 +22,15 @@
 //     if (orderType === "internal" && !tableNumber.trim())
 //       return alert("يرجى إدخال رقم الطاولة");
 
+//     // ✅ تضمين الحجم المختار (إن وجد) مع السعر الصحيح
 //     const orderItems = cartItems.map((item) => ({
 //       menuItem: item._id,
 //       name: item.name,
-//       price: item.price,
+//       price: item.selectedSize?.price || item.price, // سعر الحجم أو السعر الأساسي
 //       quantity: item.quantity,
 //       description: item.description,
-//       removedDescs: item.customizations?.removedDescs || []
+//       removedDescs: item.customizations?.removedDescs || [],
+//       selectedSize: item.selectedSize || null // ✅ بيانات الحجم
 //     }));
 
 //     const orderData = {
@@ -206,12 +208,15 @@
 
 import "./CheckoutModal.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import countryCodes from "./countryCodes";
 import axios from "axios";
 
-export default function CheckoutModal({ onClose }) {
+export default function CheckoutModal() {
   const { cartItems, totalPrice, clearCart } = useCart();
+  const navigate = useNavigate();
+
   const [orderType, setOrderType] = useState("internal");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -221,6 +226,16 @@ export default function CheckoutModal({ onClose }) {
   const [successOrder, setSuccessOrder] = useState(null);
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
 
+  // الرجوع إلى السلة مع استبدال المسار الحالي في المكدس
+  const handleBack = () => {
+    navigate("/cart", { replace: true });
+  };
+
+  // العودة للرئيسية بعد نجاح الطلب مع استبدال المسار
+  const handleCloseSuccess = () => {
+    navigate("/", { replace: true });
+  };
+
   const handleSubmit = async () => {
     if (!name.trim()) return alert("يرجى إدخال الاسم");
     if (orderType === "external" && !phone.trim())
@@ -228,15 +243,14 @@ export default function CheckoutModal({ onClose }) {
     if (orderType === "internal" && !tableNumber.trim())
       return alert("يرجى إدخال رقم الطاولة");
 
-    // ✅ تضمين الحجم المختار (إن وجد) مع السعر الصحيح
     const orderItems = cartItems.map((item) => ({
       menuItem: item._id,
       name: item.name,
-      price: item.selectedSize?.price || item.price, // سعر الحجم أو السعر الأساسي
+      price: item.selectedSize?.price || item.price,
       quantity: item.quantity,
       description: item.description,
       removedDescs: item.customizations?.removedDescs || [],
-      selectedSize: item.selectedSize || null // ✅ بيانات الحجم
+      selectedSize: item.selectedSize || null
     }));
 
     const orderData = {
@@ -266,7 +280,7 @@ export default function CheckoutModal({ onClose }) {
 
   if (successOrder) {
     return (
-      <div className="modal-overlay">
+      <div className="modal-overlay" onClick={handleCloseSuccess}>
         <div className="checkout-modal">
           <h3>تم الطلب بنجاح! 🎉</h3>
           <p>
@@ -279,7 +293,7 @@ export default function CheckoutModal({ onClose }) {
               : successOrder.status}
           </p>
           <p>تتبع طلبك من خلال الرقم أعلاه</p>
-          <button onClick={onClose} className="btn-primary">
+          <button onClick={handleCloseSuccess} className="btn-primary">
             حسناً
           </button>
         </div>
@@ -288,8 +302,8 @@ export default function CheckoutModal({ onClose }) {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="checkout-modal">
+    <div className="modal-overlay" onClick={handleBack}>
+      <div className="checkout-modal" onClick={(e) => e.stopPropagation()}>
         <h3>إتمام الطلب</h3>
 
         <div className="order-type-checkboxes">
@@ -354,7 +368,6 @@ export default function CheckoutModal({ onClose }) {
 
         {orderType === "external" && (
           <div className="phone-row">
-            {/* قائمة منسددة مخصصة بدلاً من select */}
             <div className="custom-dropdown">
               <button
                 type="button"
@@ -403,7 +416,7 @@ export default function CheckoutModal({ onClose }) {
           >
             {loading ? "جاري الإرسال..." : "تأكيد الطلب"}
           </button>
-          <button onClick={onClose} className="btn-secondary">
+          <button onClick={handleBack} className="btn-secondary">
             رجوع
           </button>
         </div>
